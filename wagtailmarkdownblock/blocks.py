@@ -1,4 +1,7 @@
 from django.forms import Media
+from django.utils.safestring import mark_safe
+
+from markdown import markdown
 from wagtail.wagtailcore.blocks import StructBlock, TextBlock
 
 
@@ -24,8 +27,17 @@ class MarkdownBlock(StructBlock):
             }
         )
 
+    def render(self, value, context=None):
+        md = markdown(
+            value['markdown'],
+            [
+                'markdown.extensions.fenced_code',
+                'codehilite',
+            ],
+        )
+        return mark_safe(md)
+
     class Meta:
         icon = 'code'
-        template = 'wagtailmarkdownblock/markdown_block.html'
         form_classname = 'markdown-block struct-block'
         form_template = 'wagtailmarkdownblock/markdown_block_form.html'
