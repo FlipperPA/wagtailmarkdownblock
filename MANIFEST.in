@@ -1,2 +1,3 @@
 include README.md
 recursive-include wagtailmarkdownblock/templates *
+recursive-include wagtailmarkdownblock/static *
