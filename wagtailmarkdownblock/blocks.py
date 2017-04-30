@@ -1,7 +1,7 @@
 from django.forms import Media
 from django.utils.safestring import mark_safe
 
-import bleach
+from bleach import clean as bleach_clean
 from markdown import markdown
 from wagtail.wagtailcore.blocks import StructBlock, TextBlock
 
@@ -43,7 +43,7 @@ class MarkdownBlock(StructBlock):
         )
 
         # Sanitizing html with bleach to avoid code injection
-        sanitized_html = bleach.clean(
+        sanitized_html = bleach_clean(
             formatted_html,
             # Allowed tags, attributes and styles
             tags=[
