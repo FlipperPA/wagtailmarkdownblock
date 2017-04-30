@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'wagtail>=1.8',
         'markdown>=2.5',
+        'bleach>=2.0.0'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
