@@ -3,6 +3,7 @@
         target_class = '#target-element-' + label;
         markdown_text = $('#' + label).val();
         var converter = new showdown.Converter();
+        showdown.setOption('tables', true);
         markdown_html = converter.makeHtml(markdown_text);
         $(target_class).html(markdown_html);
     }
