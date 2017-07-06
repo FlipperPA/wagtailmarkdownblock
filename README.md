@@ -1,8 +1,8 @@
 # Wagtail Markdown Block
 
-Markdown blocks for Wagtail Streamfields that display HTML output in realtime in the Wagtail CMS editor.
+Markdown blocks for Wagtail Streamfields.
 
-This Django app uses the [ShowdownJS](https://github.com/showdownjs/showdown) library both in Wagtail Admin and the website and requires jQuery.
+This Django app uses the [SimpleMDE](https://simplemde.com/) Markdown editor in the Wagtail Admin and the website.
 
 ## Example Usage
 
@@ -12,3 +12,8 @@ This Django app uses the [ShowdownJS](https://github.com/showdownjs/showdown) li
         paragraph = RichTextBlock()
         heading = TextBlock()
         code = MarkdownBlock()
+
+## Contributors
+
+* Timothy Allen (https://github.com/FlipperPA)
+* Milton Lenis (https://github.com/MiltonLn)
