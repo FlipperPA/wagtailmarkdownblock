@@ -1,74 +1,44 @@
+from django import forms
 from django.forms import Media
-from django.utils.safestring import mark_safe
+from django.utils.functional import cached_property
+from wagtail.wagtailcore.blocks import TextBlock
 
-import bleach
-from markdown import markdown
-from wagtail.wagtailcore.blocks import StructBlock, TextBlock
+from .widgets import MarkdownTextarea
+from .utils import render
 
 
-class MarkdownBlock(StructBlock):
+class MarkdownBlock(TextBlock):
     """
-    Markdown Block
+    Markdown block using SimpleMDE plugin
     """
 
-    markdown = TextBlock()
+    def __init__(self, **kwargs):
+        if 'classname' in kwargs:
+            kwargs['classname'] += ' markdown'
+        else:
+            kwargs['classname'] = 'markdown'
+        super(MarkdownBlock, self).__init__(**kwargs)
+
+    @cached_property
+    def field(self):
+        field_kwargs = {'widget': MarkdownTextarea()}
+        field_kwargs.update(self.field_options)
+        return forms.CharField(**field_kwargs)
 
     @property
     def media(self):
-        showdown_version = "1.6.4"
-
         return Media(
             js=[
-                'https://cdnjs.cloudflare.com/ajax/libs/showdown/{}/showdown.min.js'.format(
-                    showdown_version,
-                ),
+                'plugins/simplemde/simplemde.min.js',
+                'plugins/simplemde/simplemde.attach.js'
             ],
             css={
-                "all": ('wagtailmarkdownblock/wagtailmarkdownblock.min.css',),
+                'all': ('plugins/simplemde/simplemde.min.css',)
             }
         )
 
-    def render(self, value, context=None):
-        formatted_html = markdown(
-            value['markdown'],
-            extensions=[
-                'markdown.extensions.extra',
-                'markdown.extensions.codehilite',
-                'markdown.extensions.nl2br',
-                'markdown.extensions.sane_lists',
-                'markdown.extensions.toc',
-                'markdown.extensions.wikilinks'
-            ],
-            output_format='html5'
-        )
-
-        # Sanitizing html with bleach to avoid code injection
-        sanitized_html = bleach.clean(
-            formatted_html,
-            # Allowed tags, attributes and styles
-            tags=[
-                'p', 'div', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'tt', 'pre', 'em', 'strong', 'ul', 'li',
-                'dl', 'dd', 'dt', 'code', 'img', 'a', 'table', 'tr', 'th', 'td', 'tbody', 'caption', 'colgroup',
-                'thead', 'tfoot', 'blockquote', 'ol', 'hr', 'br'
-            ],
-            attributes={
-                '*': ['class', 'style', 'id'],
-                'a': ['href', 'target', 'rel'],
-                'img': ['src', 'alt'],
-                'tr': ['rowspan', 'colspan'],
-                'td': ['rowspan', 'colspan', 'align']
-            },
-            styles=[
-                'color', 'background-color', 'font-family', 'font-weight', 'font-size', 'width', 'height',
-                'text-align', 'border', 'border-top', 'border-bottom', 'border-left', 'border-right', 'padding',
-                'padding-top', 'padding-bottom', 'padding-left', 'padding-right', 'margin', 'margin-top',
-                'margin-bottom', 'margin-left', 'margin-right'
-            ]
-        )
-
-        return mark_safe(sanitized_html)
+    def render_basic(self, value, context=None):
+        return render(value)
 
     class Meta:
         icon = 'code'
-        form_classname = 'markdown-block struct-block'
-        form_template = 'wagtailmarkdownblock/markdown_block_form.html'
