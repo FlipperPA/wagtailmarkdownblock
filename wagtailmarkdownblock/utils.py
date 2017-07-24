@@ -26,7 +26,7 @@ def render(text):
         tags=[
             'p', 'div', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'tt', 'pre', 'em', 'strong', 'ul', 'li',
             'dl', 'dd', 'dt', 'code', 'img', 'a', 'table', 'tr', 'th', 'td', 'tbody', 'caption', 'colgroup',
-            'thead', 'tfoot', 'blockquote', 'ol', 'hr', 'br'
+            'thead', 'tfoot', 'blockquote', 'ol', 'hr', 'br', "sub", "sup"
         ],
         attributes={
             '*': ['class', 'style', 'id'],
