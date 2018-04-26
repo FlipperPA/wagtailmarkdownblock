@@ -1,7 +1,14 @@
 from django import forms
 from django.forms import Media
 from django.utils.functional import cached_property
-from wagtail.core.blocks import TextBlock
+
+try:
+    # Wagtail 2
+    from wagtail.core.blocks import TextBlock
+except ImportError:
+    # Wagtail 1
+    from wagtail.wagtailcore.blocks import TextBlock
+
 
 from .widgets import MarkdownTextarea
 from .utils import render
