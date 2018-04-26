@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 setup(
     name='wagtailmarkdownblock',
-    version="0.3.1",
+    version="0.3.2",
     description='Wagtail Markdown Block provides PrismJS Markdown conversion in Wagtail.',
     long_description='A work-in-progress alpha of a Wagtail Streamfield block for Markdown real-time output display.',
     author='Tim Allen',
