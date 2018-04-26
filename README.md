@@ -17,3 +17,5 @@ This Django app uses the [SimpleMDE](https://simplemde.com/) Markdown editor in 
 
 * Timothy Allen (https://github.com/FlipperPA)
 * Milton Lenis (https://github.com/MiltonLn)
+* Mathias Picker (https://github.com/mathiasp)
+* Tobias Ernst (https://github.com/to-bee)
