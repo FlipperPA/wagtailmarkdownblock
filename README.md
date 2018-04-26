@@ -1,5 +1,7 @@
 # Wagtail Markdown Block
 
+**PLEASE NOTE:** Future development on this package will be limited, since most of the features are now included in the new Draftail editor available in Wagtail. Thank you to everyone who contributed!
+
 Markdown blocks for Wagtail Streamfields.
 
 This Django app uses the [SimpleMDE](https://simplemde.com/) Markdown editor in the Wagtail Admin and the website.
