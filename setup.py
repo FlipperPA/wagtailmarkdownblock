@@ -5,7 +5,7 @@ with open("README.md") as readme_file:
 
 setup(
     name="wagtailmarkdownblock",
-    version="0.3.2",
+    version="0.3.3",
     description="Wagtail Markdown Block provides PrismJS Markdown conversion in Wagtail.",
     long_description=long_description,
     long_description_content_type="text/markdown",
