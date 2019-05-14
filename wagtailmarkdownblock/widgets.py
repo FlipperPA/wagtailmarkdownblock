@@ -7,6 +7,7 @@ class MarkdownTextarea(WidgetWithScript, forms.widgets.Textarea):
     """
     Textarea that uses SimpleMDE to display a preview of markdown
     """
+
     def __init__(self, **kwargs):
         super(MarkdownTextarea, self).__init__(**kwargs)
 
